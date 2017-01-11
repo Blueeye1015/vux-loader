@@ -1,5 +1,6 @@
 'use strict'
 
+const path = require('path')
 const utils = require('loader-utils')
 
 module.exports = function (source) {
@@ -20,7 +21,10 @@ module.exports = function (source) {
     })
   }
 
-  const maps = utils.getLoaderConfig(this, "vuxMaps")
+  // const maps = utils.getLoaderConfig(this, "vuxMaps")
+  const vuxConfig = utils.getLoaderConfig(this, "vux")
+  const mapPath = path.resolve(vuxConfig.options.projectRoot, 'node_modules/vux/src/components/map.json')
+  const maps = require(mapPath)
 
   if (config.options.useVuxUI && /}\s+from(.*?)'vux/.test(source)) {
     const parser = require('./libs/import-parser')

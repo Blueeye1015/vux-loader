@@ -192,6 +192,7 @@ module.exports.merge = function (oldConfig, vuxConfig) {
 
   if (hasPlugin('vux-ui', vuxConfig.plugins)) {
     const mapPath = path.resolve(vuxConfig.options.projectRoot, 'node_modules/vux/src/components/map.json')
+
     const maps = require(mapPath)
     if (isWebpack2) {
       config.plugins.push(new webpack.LoaderOptionsPlugin({
@@ -386,7 +387,7 @@ function getBabelLoader(projectRoot, name) {
 
   return {
     test: regex,
-    loader: 'babel',
+    loader: 'babel-loader',
     include: componentPath
   }
 }
